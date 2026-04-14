@@ -1,4 +1,4 @@
-// Name: MANUEL EDWARDO DE LA ROSA MODESTO
+// Name: Manuel Edwardo De La Rosa M- Nhan Bui.
 // Course: CSE 4300/5300
 // Final Project Operating Systems Page Replacement Algorithms
 
@@ -6,11 +6,11 @@
 #include <fstream>  
 #include <string>    
 
-using namespace std; // Use standard namespace to avoid writing std:: everywhere
+using namespace std; 
 
 int main() {
     string filename;
-    // Prompt the user to enter the name of the input text file
+    //ask for the input file. 
     cout << "Enter the input file name: ";
     cin >> filename;
 
@@ -19,9 +19,8 @@ int main() {
 
     // Check if the file failed to open 
     if (!file.is_open()) {
-        // Print an error message if the file could not be opened
+        // Print an error message if the file could not be opened and exit.
         cout << "Error: Could not open file " << filename << endl;
-        // Exit the program with an error code
         return 1;
     }
 
@@ -53,28 +52,26 @@ int main() {
     while (file >> temp_val) {
         // Increment the count for every number successfully read
         ref_count++;
-        // Read and discard the trailing comma (if any)
+        //now the comma.
         file >> comma;
     }
-
-    // Clear the End-Of-File (EOF) flag so we can read the file again
+    //Clear the file stream.
     file.clear();
+
     // Seek back to the saved position right before the reference string started
     file.seekg(pos);
 
     // Dynamically allocate a basic array to hold the reference string based on our count
-    // This avoids using forbidden containers like std::vector
     int* ref_string = new int[ref_count];
 
     // Loop through the exact number of elements we just counted
     for (int i = 0; i < ref_count; i++) {
         // Read the actual integer value into our newly allocated array
         file >> ref_string[i];
-        // Read and discard the comma separating the numbers
+        //then the comma.
         file >> comma;
     }
-
-    // Close the file stream since we have successfully loaded all the data into memory
+    //When done reading, close the file.
     file.close();
 
     // Dynamically allocate a 1D array to represent the current memory frames
@@ -85,8 +82,7 @@ int main() {
         frames[i] = -1;
     }
 
-    // Dynamically allocate a 2D array to record the history of memory states for printing
-    // This is an array of pointers, where each pointer holds a row (frame)
+	// Dynamically allocate a 2D array to record the history of memory states for printing at the end
     int** history = new int* [num_frames];
 
     // Loop through each frame row to allocate the columns (the length of the reference string)
@@ -105,16 +101,14 @@ int main() {
         // Extract the current page requested from the reference string
         int current_page = ref_string[i];
 
-        // Declare a boolean flag to track if the page is already in memory (a hit)
+		// track if the page is already in memory or not
         bool is_hit = false;
 
         // Loop through all current memory frames to check for the requested page
         for (int j = 0; j < num_frames; j++) {
-            // If the frame holds the requested page, we found it!
+			// If the frame holds the requested page we set the flag to true and break out of the loop early since we found a hit
             if (frames[j] == current_page) {
-                // Set the hit flag to true
                 is_hit = true;
-                // Break out of the loop early since we already found the page
                 break;
             }
         }
@@ -141,7 +135,6 @@ int main() {
                 if (frames[j] == -1) {
                     // Record the index of the empty frame
                     replace_idx = j;
-                    // Break out of the loop since we found a spot
                     break;
                 }
             }
@@ -162,7 +155,7 @@ int main() {
 
                     // Loop through all current frames to evaluate which one is the best to replace
                     for (int j = 0; j < num_frames; j++) {
-                        // Assume the page is never used again (set distance to beyond reference length)
+                        // Assume the page is never used again (sets the distance to beyond reference length)
                         int next_use = ref_count;
 
                         // Look forward in the reference string starting from the very next request
@@ -197,18 +190,16 @@ int main() {
         }
     }
 
-    // --- Output Formatting ---
+    // --- Output Formatting Section ---
 
     // Print the top row consisting of the reference string values
     for (int i = 0; i < ref_count; i++) {
-        // Enclose each reference number in quotes and space to match the PDF output exact format
         cout << "\"" << ref_string[i] << " \"";
-        // Print a comma between values, except for the very last value
         if (i < ref_count - 1) {
             cout << ",";
         }
     }
-    // Print a newline to finish the top row
+
     cout << endl;
 
     // Loop through each frame to print the history table row by row
@@ -220,33 +211,22 @@ int main() {
                 // If it was a fault, print the value stored in the frame enclosed in quotes
                 cout << "\"" << history[i][j] << " \"";
             }
-            // Always print a comma at the end of the cell, even if it's blank (to match CSV style)
             cout << ",";
         }
-        // Print a newline to move to the next frame row
         cout << endl;
     }
-
-    // Print a blank line to separate the table from the fault summary
     cout << endl;
     // Output the total calculated number of page faults
     cout << "Total Page Faults: " << faults << endl;
 
-    // --- Cleanup Memory ---
-    // Since we dynamically allocated arrays manually without vectors, we must clean them up
-
-    // Delete the dynamically allocated reference string array
     delete[] ref_string;
-    // Delete the dynamically allocated current frames array
     delete[] frames;
 
     // Loop through each row of the 2D history array to delete the columns
     for (int i = 0; i < num_frames; i++) {
         delete[] history[i];
     }
-    // Finally, delete the array of pointers representing the rows
     delete[] history;
 
-    // Return 0 indicating the program executed successfully
     return 0;
 }
