@@ -19,4 +19,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\FIFO.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\LRU.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\OPT.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
