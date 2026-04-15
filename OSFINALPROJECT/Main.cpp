@@ -178,6 +178,25 @@ int main() {
                         }
                     }
                 }
+                else if (algo == 'L') {
+                    int least_recent = ref_count;
+
+                    for (int j = 0; j < num_frames; j++) {
+                        int last_use = -1;
+
+                        for (int k = i - 1; k >= 0; k--) {
+                            if (ref_string[k] == frames[j]) {
+                                last_use = k;
+                                break;
+            }
+        }
+
+        if (last_use < least_recent) {
+            least_recent = last_use;
+            replace_idx = j;
+        }
+    }
+}
             }
 
             // Replace the chosen frame with the newly requested page
