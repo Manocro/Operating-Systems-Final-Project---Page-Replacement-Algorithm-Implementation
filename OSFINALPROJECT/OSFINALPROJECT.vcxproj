@@ -129,6 +129,9 @@
     <Text Include="..\FIFO.txt" />
     <Text Include="..\LRU.txt" />
     <Text Include="..\OPT.txt" />
+    <Text Include="MyTestFIFO.txt" />
+    <Text Include="MyTestLRU.txt" />
+    <Text Include="MyTestOPT.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

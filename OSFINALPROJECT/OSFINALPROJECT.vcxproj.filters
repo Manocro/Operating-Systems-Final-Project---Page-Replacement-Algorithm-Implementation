@@ -29,5 +29,12 @@
     <Text Include="..\OPT.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="MyTestFIFO.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="MyTestOPT.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="MyTestLRU.txt" />
   </ItemGroup>
 </Project>
