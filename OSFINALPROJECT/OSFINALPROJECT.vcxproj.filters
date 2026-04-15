@@ -35,6 +35,8 @@
     <Text Include="MyTestOPT.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="MyTestLRU.txt" />
+    <Text Include="MyTestLRU.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -210,7 +210,44 @@ int main() {
         }
     }
 
-    // --- Output Formatting Section ---
+
+    // --- Output Formatting ---
+
+     // 1. Top row: Print the reference string with spacing
+    for (int i = 0; i < ref_count; i++) {
+        // Print the number followed by 3 spaces to create a clean column
+        cout << ref_string[i] << "   ";
+    }
+    cout << endl;
+
+    // 2. Dashed line: Print a separator that matches the width of the columns
+    for (int i = 0; i < ref_count; i++) {
+        // Print 4 dashes per column to match the 4-character width of the numbers + spaces
+        cout << "----";
+    }
+    cout << endl;
+
+    // 3. Table rows: Print frame history, leaving hits completely blank
+    for (int i = 0; i < num_frames; i++) {
+        for (int j = 0; j < ref_count; j++) {
+            // If it's a page fault (a number is stored), print the number and spaces
+            if (history[i][j] != -1) {
+                cout << history[i][j] << "   ";
+            }
+            // If it's a page hit (-1 is stored), print exactly 4 spaces to leave it blank
+            else {
+                cout << "    ";
+            }
+        }
+        cout << endl;
+    }
+
+    // Print a blank line, then the total faults
+    cout << endl << "Total Page Faults: " << faults << endl;
+
+
+    /*
+    // --- CSV FORMAT - Output Formatting Section ---
 
     // Print the top row consisting of the reference string values
     for (int i = 0; i < ref_count; i++) {
@@ -249,4 +286,8 @@ int main() {
     delete[] history;
 
     return 0;
+
+
+
+    */
 }
