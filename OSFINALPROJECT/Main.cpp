@@ -178,6 +178,7 @@ int main() {
                         }
                     }
                 }
+                // Check if the user selected the LRU Algorithm( 'L' )
                 else if (algo == 'L') {
                     int least_recent = ref_count;
 
